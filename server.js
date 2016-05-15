@@ -3,6 +3,7 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 var port = process.env.PORT || 1337;
+var mongoose = require('mongoose');  
 
 //Mongoose models
 var userOp = require("./models/user");
