@@ -3,14 +3,6 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 var port = process.env.PORT || 1337;
-var mongoose = require('mongoose');  
-
-//Mongoose models
-var userOp = require("./models/user");
-var docOp = require("./models/doc");
-
-//list of users online
-var userOnlineList = new Object(); 
 
 
 router.use(function (req,res,next) {
