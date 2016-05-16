@@ -2,7 +2,6 @@
 * This example uses the node MongoDB module to connect to the local
 * mongodb database on this virtual machine
 *
-* More here: http://mongodb.github.io/node-mongodb-native/markdown-docs/insert.html
 */
 
 //require node modules (see package.json)
