@@ -4,6 +4,8 @@ var router = express.Router();
 var path = __dirname + '/views/';
 var port = process.env.PORT || 1337;
 
+app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/node_modules'));
 
 router.use(function (req,res,next) {
   console.log("/" + req.method);
