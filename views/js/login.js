@@ -1,18 +1,20 @@
-$(function() {
+/* 
+* This example uses the node MongoDB module to connect to the local
+* mongodb database on this virtual machine
+*
+*/
 
-    $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
+//require node modules (see package.json)
+var port = process.env.PORT || 1337;
+var mongo = require('mongodb').MongoClient;
 
-});
+
+//Persist in DB
+        var data ="hope it works";
+        mongo.connect(process.env.PROJECT_MONGOLAB_URI, function (err, db) {
+            var collection = db.collection('chat messages');
+            collection.insert({ content: data }, function (err, o) {
+                if (err) { console.warn(err.message); }
+                else { console.log("chat message inserted into db: " + data); }
+            });
+        });
