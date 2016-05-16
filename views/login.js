@@ -6,8 +6,6 @@
 var express = require("express");
 var app = express();
 var router = express.Router();
-var path = __dirname + '/views/';
-var port = process.env.PORT || 1337;
 var port = process.env.PORT || 1337;
 var mongo = require('mongodb').MongoClient;
 
