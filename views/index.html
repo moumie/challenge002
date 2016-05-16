@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Single page web app using Angularjs</title>
+<title>Player Login and Sign up Page</title>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="script.js"></script>
+<script src="login.js"></script>
 
 
 </head>
@@ -103,26 +103,26 @@
                                 <div class="form-group">
                                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                        <input id="fname" type="text" class="form-control" name="firstname" placeholder="First Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                                        <input id="lname" type="text" class="form-control" name="lastname" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                        <input id="passwd" type="password" class="form-control" name="passwd" placeholder="Password">
                                     </div>
                                 </div>
                                     
                                 <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+                                    <label for="icode" class="col-md-3 control-label">Country</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="icode" placeholder="">
+                                        <input id="cntry" type="text" class="form-control" name="country" placeholder="">
                                     </div>
                                 </div>
 
@@ -154,6 +154,44 @@
          </div> 
     </div>
     
-    
+     
+    <script>
+    $(function () {
+    //require node modules (see package.json)
+    var MongoClient = require('mongodb').MongoClient, format = require('util').format;
+      $('#btn-signup').on('keypress',function(){
+            var firstname= $('#fname').val();
+            var lastname= $('#lname').val();
+            var password= $('#passwd').val();
+            var country= $('#cntry').val();
+            
+            console.log('firstname:'+ firstname);
+            console.log('lastname:'+ lastname);
+            console.log('password'+ password);
+            console.log('country'+ country);
+            
+
+
+//connect away
+MongoClient.connect('mongodb://moumie23:moumie23@ds011442.mlab.com:11442/moumiemongodb', function(err, db) {
+  if (err) throw err;
+  console.log("Connected to Database");
+
+  //simple json record
+	var document = {name:"David", title:"About MongoDB"};
+  
+	//insert record
+	db.collection('test').insert(document, function(err, records) {
+		if (err) throw err;
+		console.log("Record added as "+records[0]._id);
+	});
+});
+
+           
+        });
+
+    });  
+    </script>
+   
 </body>
 </html>
