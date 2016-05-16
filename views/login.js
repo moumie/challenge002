@@ -6,20 +6,16 @@
 */
 
 //require node modules (see package.json)
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+var port = process.env.PORT || 1337;
+var mongo = require('mongodb').MongoClient;
 
-//connect away
-MongoClient.connect('mongodb://moumie23:moumie23@ds011442.mlab.com:11442/moumiemongodb', function(err, db) {
-  if (err) throw err;
-  console.log("Connected to Database");
 
-  //simple json record
-	var document = {name:"David", title:"About MongoDB"};
-  
-	//insert record
-	db.collection('test').insert(document, function(err, records) {
-		if (err) throw err;
-		console.log("Record added as "+records[0]._id);
-	});
-});
+//Persist in DB
+        var data ="hope it works";
+        mongo.connect(process.env.PROJECT_MONGOLAB_URI, function (err, db) {
+            var collection = db.collection('chat messages');
+            collection.insert({ content: data }, function (err, o) {
+                if (err) { console.warn(err.message); }
+                else { console.log("chat message inserted into db: " + data); }
+            });
+        });
